@@ -1,38 +1,55 @@
 :host {
     display: flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
     background: transparent;
     color: inherit;
+    -webkit-app-region: no-drag;
 }
 
 button {
     flex: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    background: transparent !important;
-    color: inherit !important;
-    font-size: 8px;
-    width: 40px;
-    padding: 0;
-    line-height: 0;
-    text-align: center;
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
-    
-    &:not(:hover):not(:active) {
-        background: transparent;
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    outline: none;
+
+    svg {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        opacity: 0;
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    &.close {
+        background: #ff5f57;
+    }
+
+    &.minimize {
+        background: #febc2e;
+    }
+
+    &.maximize {
+        background: #28c840;
+    }
+
+    &:hover:not(:disabled) svg,
+    &:active svg {
+        opacity: 1;
     }
 
     &:focus {
         box-shadow: none;
-    }
-
-    svg {
-        width: 10px;
-        height: 10px;
-
-        path {
-            fill: currentColor;
-        }
+        outline: none;
     }
 }

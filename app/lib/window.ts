@@ -92,11 +92,7 @@ export class Window {
             bwOptions.frame = true
         } else {
             bwOptions.titleBarStyle = 'hidden'
-            if (process.platform === 'win32') {
-                bwOptions.titleBarOverlay = {
-                    color: '#00000000',
-                }
-            }
+            // No titleBarOverlay on win32: the renderer draws macOS-style traffic lights instead
         }
 
         if (process.platform === 'darwin') {

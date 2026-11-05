@@ -168,4 +168,18 @@ $tabs-height: 38px;
         left: 0;
         right: 0;
     }
+
+    // macOS-style pill tabs
+    &.active {
+        background: var(--theme-bg-more);
+        border-radius: 7px;
+
+        .current-tab-indicator {
+            display: none;
+        }
+    }
+
+    &:not(.active):hover {
+        background: var(--theme-bg-more);
+    }
 }

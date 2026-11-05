@@ -140,15 +140,9 @@ $tab-border-radius: 4px;
         }
 
         &.persistent {
-        //   min-width: 72px; // 2 x 36 px height, ie 2 squares
-        // Given WCO on Windows, the min-width of the window buttons is about 138px.
-            min-width: 138px;
+        // Traffic lights are drawn by the renderer on the left edge now,
+        // so no right-side reserve for the native overlay is needed.
         }
-    }
-
-    &>.window-controls-spacer {
-        min-width: 138px;
-        height: 100%;
     }
 
     & > .inset {
@@ -160,6 +154,12 @@ $tab-border-radius: 4px;
 
     window-controls {
         padding-left: 10px;
+
+        // macOS-style traffic lights live on the left edge of the tab bar
+        &.background {
+            order: -1;
+            align-self: center;
+        }
     }
 
     .cdk-drag-animating {
