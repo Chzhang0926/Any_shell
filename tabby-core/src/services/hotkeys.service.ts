@@ -107,11 +107,17 @@ export class HotkeysService {
                 })
             }
 
-            registerEvent('keydown')
-            registerEvent('keyup')
-            registerEvent('wheel')
-            registerEvent('mouseup', event => 'button' in event && event.button === 1)
-            registerEvent('auxclick', event => 'button' in event && event.button === 1)
+            // Register outside the Angular zone: these listeners fire for every
+            // key/wheel event in the app. pushKeyEvent decides itself when the
+            // zone is actually needed (a matched hotkey), so plain typing never
+            // enters change detection.
+            this.zone.runOutsideAngular(() => {
+                registerEvent('keydown')
+                registerEvent('keyup')
+                registerEvent('wheel')
+                registerEvent('mouseup', event => 'button' in event && event.button === 1)
+                registerEvent('auxclick', event => 'button' in event && event.button === 1)
+            })
         })
 
         // deprecated
@@ -215,22 +221,29 @@ export class HotkeysService {
         }
 
         const matched = this.matchActiveHotkey()
-        this.zone.run(() => {
-            if (matched) {
+        // Enter the zone only when a hotkey actually fires or releases - the
+        // overwhelming majority of key events (plain typing) match nothing and
+        // must not trigger a full change-detection pass.
+        if (matched) {
+            this.zone.run(() => {
                 if (this.recognitionPhase) {
                     this.emitHotkeyOn(matched)
                     if (eventName === 'wheel' || eventName === 'mouseup' || eventName === 'auxclick') {
                         this.emitHotkeyOff(matched)
                     }
                 }
-            } else if (this.pressedHotkey) {
-                this.emitHotkeyOff(this.pressedHotkey)
-            }
-        })
+            })
+        } else if (this.pressedHotkey) {
+            const hotkeyToRelease = this.pressedHotkey
+            this.zone.run(() => {
+                this.emitHotkeyOff(hotkeyToRelease)
+            })
+        }
 
-        this.zone.run(() => {
-            this._key.next(getKeyName(eventData))
-        })
+        // No zone.run here: key$ has no in-tree subscribers, and per-keystroke
+        // change detection is exactly what this service must avoid. Any plugin
+        // subscribing to key$ gets the value synchronously as before.
+        this._key.next(getKeyName(eventData))
 
         if (process.platform === 'darwin' && eventData.metaKey && eventName === 'keydown' && !['Ctrl', 'Shift', altKeyName, metaKeyName, 'Enter'].includes(keyName)) {
             // macOS will swallow non-modified keyups if Cmd is held down
