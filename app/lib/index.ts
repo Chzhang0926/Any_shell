@@ -1,3 +1,5 @@
+import './compileCache'
+
 // Registers main-process error logging - must be first so it catches import-time errors
 import { logMainError } from './errors'
 
