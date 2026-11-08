@@ -30,7 +30,7 @@
     "@xterm/xterm": "^5",
     "ansi-colors": "^4",
     "binstring": "^0.2.1",
-    "buffer-replace": "^1",
+    "buffer-replace": "^2",
     "cli-spinner": "^0.2.10",
     "dataurl": "0.1.0",
     "hexer": "^1",
