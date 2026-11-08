@@ -30,7 +30,7 @@
     "apply-loader": "2.0.0",
     "babel-loader": "^9",
     "clone-deep": "^4",
-    "compare-versions": "^5",
+    "compare-versions": "^6",
     "core-js": "^3",
     "cross-env": "7.0.3",
     "css-loader": "^6",
