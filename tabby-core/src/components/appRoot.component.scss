@@ -95,6 +95,9 @@ $tab-border-radius: 4px;
     display: flex;
     width: 100%;
 
+    // hairline separator below the unified toolbar, as on macOS
+    border-bottom: 1px solid rgba(0, 0, 0, 0.22);
+
     .btn-tab-bar {
         line-height: calc(var(--tabs-height) + 2px);
         height: var(--tabs-height);

@@ -80,6 +80,14 @@ export class Application {
             app.disableHardwareAcceleration()
         }
 
+        // Feed the xterm WebGL renderer properly: GPU-rasterize compositor
+        // layers and allow zero-copy texture uploads. The default GPU
+        // blocklist is conservative on some Windows driver combinations and
+        // silently downgrades to software compositing.
+        app.commandLine.appendSwitch('enable-gpu-rasterization')
+        app.commandLine.appendSwitch('enable-zero-copy')
+        app.commandLine.appendSwitch('ignore-gpu-blocklist')
+
         this.userPluginsPath = path.join(
             app.getPath('userData'),
             'plugins',

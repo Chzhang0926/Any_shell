@@ -416,6 +416,7 @@ export class XTermFrontend extends Frontend {
                 this.canvasAddon?.clearTextureAtlas()
             })
         }
+        console.info(`[tabby] terminal renderer: ${this.webGLAddon ? 'WebGL2 (GPU-accelerated)' : 'Canvas (software fallback)'}`)
 
         // Allow an animation frame
         await new Promise(r => setTimeout(r, 100))

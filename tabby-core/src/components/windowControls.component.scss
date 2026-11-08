@@ -43,6 +43,12 @@ button {
         background: #28c840;
     }
 
+    :host(.window-inactive) &.close,
+    :host(.window-inactive) &.minimize,
+    :host(.window-inactive) &.maximize {
+        background: #949499;
+    }
+
     &:hover:not(:disabled) svg,
     &:active svg {
         opacity: 1;

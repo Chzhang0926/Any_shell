@@ -169,10 +169,11 @@ $tabs-height: 38px;
         right: 0;
     }
 
-    // macOS-style pill tabs
+    // macOS-style pill tabs (Ventura segmented look)
     &.active {
         background: var(--theme-bg-more);
-        border-radius: 7px;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
         .current-tab-indicator {
             display: none;
@@ -181,5 +182,9 @@ $tabs-height: 38px;
 
     &:not(.active):hover {
         background: var(--theme-bg-more);
+    }
+
+    &:not(.active) {
+        transition: background 0.15s ease;
     }
 }
