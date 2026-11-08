@@ -45,7 +45,7 @@
     "gettext-extractor": "^3",
     "html-loader": "4.2.0",
     "json-loader": "^0.5.7",
-    "lru-cache": "^6",
+    "lru-cache": "^11",
     "macos-release": "^3",
     "ngx-filesize": "^3",
     "ngx-toastr": "^16",
