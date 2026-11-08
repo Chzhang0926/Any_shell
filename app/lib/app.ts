@@ -80,13 +80,10 @@ export class Application {
             app.disableHardwareAcceleration()
         }
 
-        // Feed the xterm WebGL renderer properly: GPU-rasterize compositor
-        // layers and allow zero-copy texture uploads. The default GPU
-        // blocklist is conservative on some Windows driver combinations and
-        // silently downgrades to software compositing.
-        app.commandLine.appendSwitch('enable-gpu-rasterization')
-        app.commandLine.appendSwitch('enable-zero-copy')
-        app.commandLine.appendSwitch('ignore-gpu-blocklist')
+        // NOTE: do NOT add ignore-gpu-blocklist / enable-zero-copy here. They
+        // were tried and hang the renderer at the splash screen on NVIDIA
+        // Optimus laptops (dual GPU). The xterm WebGL addon already runs on
+        // the GPU with the default switches.
 
         this.userPluginsPath = path.join(
             app.getPath('userData'),
