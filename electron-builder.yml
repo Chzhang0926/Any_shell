@@ -1,6 +1,6 @@
 ---
 appId: org.tabby
-productName: Tabby
+productName: Anyshell
 compression: normal
 npmRebuild: false
 protocols:
@@ -46,7 +46,7 @@ asarUnpack:
 - node_modules/node-pty/build/Release/conpty/*
 win:
   icon: "./build/windows/icon.ico"
-  artifactName: tabby-${version}-portable-${env.ARCH}.${ext}
+  artifactName: anyshell-${version}-portable-${env.ARCH}.${ext}
   signtoolOptions:
     rfc3161TimeStampServer: http://timestamp.sectigo.com
   # OpenConsole.exe is already signed by Microsoft
@@ -54,14 +54,14 @@ win:
   - '!OpenConsole.exe'
 nsis:
   oneClick: false
-  artifactName: tabby-${version}-setup-${env.ARCH}.${ext}
+  artifactName: anyshell-${version}-setup-${env.ARCH}.${ext}
   installerIcon: "./build/windows/icon.ico"
   allowToChangeInstallationDirectory: true
-  shortcutName: Tabby Terminal
+  shortcutName: Anyshell
 mac:
   category: public.app-category.utilities
   icon: "./build/mac/icon.icns"
-  artifactName: tabby-${version}-macos-${env.ARCH}.${ext}
+  artifactName: anyshell-${version}-macos-${env.ARCH}.${ext}
   hardenedRuntime: true
   entitlements: "./build/mac/entitlements.plist"
   entitlementsInherit: "./build/mac/entitlements.plist"
@@ -81,7 +81,7 @@ mac:
 linux:
   category: "Utility;TerminalEmulator;System"
   icon: "./build/icons"
-  artifactName: tabby-${version}-linux-${env.ARCH}.${ext}
+  artifactName: anyshell-${version}-linux-${env.ARCH}.${ext}
   executableArgs:
   - "--no-sandbox"
   desktop:
